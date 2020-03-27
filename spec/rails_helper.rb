@@ -75,9 +75,8 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 
   # deviseのテスト用helpers使用
-  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
-
   # factoryを省略してcreate出来るための設定
   config.include FactoryBot::Syntax::Methods
 
