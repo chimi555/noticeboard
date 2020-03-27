@@ -9,7 +9,7 @@ class User < ApplicationRecord
   validates :email, uniqueness: true, presence: true
 
   def login
-    @login || self.name || self.email
+    @login || name || email
   end
 
   def self.find_for_database_authentication(warden_conditions)
