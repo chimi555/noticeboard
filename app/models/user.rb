@@ -2,7 +2,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          authentication_keys: [:login]
+  # 追加のattribute
   attr_accessor :login
+  # バリデーション
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :email, uniqueness: true, presence: true
 
   def login
     @login || self.name || self.email
