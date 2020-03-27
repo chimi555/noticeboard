@@ -28,6 +28,13 @@
               ログイン
             <% end %>
           </li>
+          <li>
+            <%= form_for(:user, url: login_path) do |f| %>
+              <%= f.hidden_field :login, value: 'noticeboard@example.com' %>
+              <%= f.hidden_field :password, value: 'noticeboard' %>
+              <%= f.submit 'テストログイン' %>
+            <% end %>
+          </li>
         <% end %>
       </ul>
     </nav>
