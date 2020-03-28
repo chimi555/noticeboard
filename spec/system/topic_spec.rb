@@ -90,7 +90,7 @@ RSpec.describe 'Topics', type: :system do
         expect(page).to have_link "削除"
       end
 
-      example 'トピックが削除できること', js:true do
+      example 'トピックが削除できること', js: true do
         within(".topic-show-edit") do
           click_on '削除'
         end
