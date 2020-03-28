@@ -1,0 +1,15 @@
+<% provide(:title, @topic.title) %>
+<div class="container">
+  <div class="topic-show-area">
+    <h2 class="page-tit topic-show-tit"><%= @topic.title %></h2>
+    <div class="topic-show-description">
+       <%= @topic.description %>
+    </div>
+    <div class="topic-show-user">
+       <%= @topic.user.name %>
+    </div>
+    <span class="topic-time">
+      <%= time_ago_in_words(@topic.created_at) %>前
+    </span>
+  </div>
+</div>
