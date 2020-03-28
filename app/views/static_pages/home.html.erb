@@ -1,2 +1,16 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 topic-area">
+      <% if @topics.any? %>
+        <ol class="topics">
+          <%= render @topics %>
+        </ol>
+         <%= paginate @topics %>
+      <% else %>
+        トピックはまだありません
+      <% end %>
+    </div>
+    <div class="col-md-4 category-area">
+    </div>
+  </div>
+</div>
