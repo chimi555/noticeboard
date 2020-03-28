@@ -1,2 +1,17 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<%= provide(:title, @user.name)%>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 user-info">
+    </div>
+    <div class="col-md-8 topic-area">
+      <% if @user.topics.any? %>
+        <ol class="topics">
+          <%= render @topics %>
+        </ol>
+         <%= paginate @topics %>
+      <% else %>
+        作成したトピックはまだありません
+      <% end %>
+    </div>
+  </div>
+</div>

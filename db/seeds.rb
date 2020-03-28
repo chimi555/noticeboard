@@ -15,3 +15,11 @@ User.create!(
                password_confirmation: password,
               )
 end
+
+# Topic
+users = User.order(:created_at).take(5)
+10.times do
+  title = "#{Faker::Book.title}好きなみんな集まれ！"
+  description = "#{Faker::Book.title}について語るスレです。"
+  users.each { |user| user.topics.create!(title: title, description: description) }
+end
