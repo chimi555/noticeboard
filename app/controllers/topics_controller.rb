@@ -1,5 +1,6 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   def show
     @topic = Topic.find(params[:id])
@@ -20,9 +21,34 @@ class TopicsController < ApplicationController
     end
   end
 
+  def edit
+    @topic = Topic.find(params[:id])
+  end
+
+  def update
+    @topic = Topic.find(params[:id])
+    if @topic.update_attributes(topic_params)
+      flash[:success] = "トピックが更新されました！"
+      redirect_to topic_path(@topic.id)
+    else
+      render 'topics/edit'
+    end
+  end
+
+  def destroy
+    @topic.destroy
+    flash[:success] = '旅行プランが削除されました'
+    redirect_to current_user
+  end
+
   private
 
   def topic_params
     params.require(:topic).permit(:title, :description)
+  end
+
+  def correct_user
+    @topic = current_user.topics.find_by(id: params[:id])
+    redirect_to root_url if @topic.nil?
   end
 end

@@ -8,8 +8,22 @@
     <div class="topic-show-user">
        <%= @topic.user.name %>
     </div>
-    <span class="topic-time">
+    <span class="topic-show-time">
       <%= time_ago_in_words(@topic.created_at) %>前
     </span>
   </div>
+  <% if current_user?(@topic.user) %>
+    <div class="trip-show-edit">
+      <span class="btn">
+        <%= link_to edit_topic_path(@topic) do %>
+          <i class="fas fa-edit"></i>編集
+        <% end %>
+      </span>
+      <span class="btn">
+        <%= link_to @topic, method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+          <i class="far fa-trash-alt"></i>削除
+        <% end %>
+      </span>
+    </div>
+  <% end %>
 </div>
