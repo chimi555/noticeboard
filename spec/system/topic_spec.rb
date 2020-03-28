@@ -37,6 +37,6 @@ RSpec.describe 'Topic', type: :system do
         end.to change(Topic, :count).by(0)
         expect(page).to have_content '新しいトピックの登録に失敗しました。'
       end
-    end 
+    end
   end
 end

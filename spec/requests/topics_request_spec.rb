@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Topics", type: :request do
   let(:user) { create(:user) }
   let(:topic) { create(:topic) }
-  let(:topic_params) { {title: 'テストトピックタイトル', description: 'テストトピックです。'} }
+  let(:topic_params) { { title: 'テストトピックタイトル', description: 'テストトピックです。' } }
 
   describe "#show" do
     before do
@@ -46,9 +46,9 @@ RSpec.describe "Topics", type: :request do
         sign_in user
       end
 
-      example '新しいトピックが登録できること' do      
+      example '新しいトピックが登録できること' do
         expect do
-          post topics_path, params: { topic: topic_params}
+          post topics_path, params: { topic: topic_params }
         end.to change(user.topics, :count).by(1)
       end
     end
@@ -56,7 +56,7 @@ RSpec.describe "Topics", type: :request do
     context 'ログインしていないユーザー' do
       example '新しいトピックが登録できないこと' do
         expect do
-          post topics_path, params: { topic: topic_params}
+          post topics_path, params: { topic: topic_params }
         end.not_to change(user.topics, :count)
         expect(response).to redirect_to '/users/sign_in'
       end
