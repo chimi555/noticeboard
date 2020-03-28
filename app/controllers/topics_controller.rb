@@ -37,7 +37,7 @@ class TopicsController < ApplicationController
 
   def destroy
     @topic.destroy
-    flash[:success] = '旅行プランが削除されました'
+    flash[:success] = 'トピックが削除されました。'
     redirect_to current_user
   end
 
