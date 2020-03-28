@@ -5,10 +5,12 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li>
-            <i class="far fa-plus-square"></i>新規スレッド
+            <%= link_to new_topic_path do %>
+              <i class="fas fa-pencil-alt"></i>トピック作成
+            <% end %>
           </li>
           <li>
-            <%= link_to user_path(current_user)  do %>
+            <%= link_to user_path(current_user) do %>
               <i class="fas fa-user-circle"></i>マイページ
             <% end %>
           </li>

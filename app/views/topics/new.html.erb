@@ -1,0 +1,17 @@
+<% provide(:title, "新規トピックの登録") %>
+<div class="container">
+  <h2 class="page-tit">新規トピック登録</h2>
+  <div class="trip-form">
+    <%= form_for(@topic) do |f|%>
+      <div class="field">
+        <%= f.text_field :title, placeholder: "トピックタイトル", class: 'form-wide form-control' %>
+      </div>
+      <div class="field">
+        <%= f.text_field :description, placeholder: "トピック説明", class: 'form-wide form-control' %>
+      </div>
+      <div class="action">
+        <%= f.submit "新規トピック作成", class: 'btn' %>
+      </div>
+    <% end %>
+  </div>
+</div>
