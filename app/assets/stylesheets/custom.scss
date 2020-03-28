@@ -2,3 +2,89 @@
 @import "bootstrap";
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
+
+/*universal*/
+
+body{
+  padding-top: 100px;
+  padding-bottom: 50px;
+  background-color: #ebedfc
+}
+
+section{
+  overflow: auto;
+}
+
+textarea{
+  resize:vertical;
+}
+
+li{
+  list-style: none;
+  padding: 5px 0;
+}
+
+ul, ol{
+  padding-inline-start: 0px;
+}
+
+a{
+  word-break: break-all;
+}
+
+h1,h2{
+  line-height: 1;
+}
+
+h1{
+  font-size: 2em;
+  margin-bottom: 30px;
+}
+
+h2{
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  color: #777;
+}
+
+p{
+  font-size: 1.1em;
+  line-height: 1.5em;
+}
+
+/* header */
+
+header {
+  padding: 5px 0 5px;
+  background-color: #ef5e09eb;
+}
+
+#logo{
+  float: left;
+  font-weight: bold;
+  padding: 15px;
+  font-size: 25px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.navbar-right{
+  float: right;
+  padding-top: 20px 15px ;
+  li{
+    float: left;
+    text-decoration: none;
+    a{
+      color: #fff;
+    }
+  }
+  .testlogin-btn{
+    display: inline-block;
+    text-align: center;
+    background-color:#fff;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 15px;
+    color: rgba(0,0,0,0.7);
+  }
+}
