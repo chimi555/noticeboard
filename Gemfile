@@ -12,6 +12,7 @@ gem 'devise-i18n-views'
 gem 'faker'
 gem 'font-awesome-sass'
 gem 'jbuilder', '~> 2.5'
+gem 'kaminari'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 3.11'
 gem 'rails', '~> 5.2.4'
@@ -20,6 +21,7 @@ gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
 group :development, :test do
+  gem 'bullet'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
   gem 'rails-controller-testing'

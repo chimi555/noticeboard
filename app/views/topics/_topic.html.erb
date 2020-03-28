@@ -1,0 +1,13 @@
+<li id="topic-<%= topic.id %>">
+  <%= link_to topic do %>
+    <div class="topic-title">
+      <%= topic.title %>
+    </div>
+    <div class="topic-description">
+      <%= topic.description %>
+    </div>
+    <span class="topic-time">
+      <%= time_ago_in_words(topic.created_at) %>前
+    </span>
+  <% end %>
+</li>
