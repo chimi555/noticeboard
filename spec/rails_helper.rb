@@ -77,6 +77,7 @@ RSpec.configure do |config|
   # deviseのテスト用helpers使用
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
+
   # factoryを省略してcreate出来るための設定
   config.include FactoryBot::Syntax::Methods
 
@@ -88,5 +89,17 @@ RSpec.configure do |config|
   config.before(:each, type: :system, js: true) do
     driven_by :selenium_remote
     host! "http://#{Capybara.server_host}:#{Capybara.server_port}"
+  end
+
+  # bullet設定
+  config.before(:each) do
+    Bullet.start_request if Bullet.enable?
+  end
+  
+  config.after(:each) do
+    if Bullet.enable?
+      Bullet.perform_out_of_channel_notifications if Bullet.notification?
+      Bullet.end_request
+    end
   end
 end
