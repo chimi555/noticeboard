@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :new]
+  before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   def show
@@ -49,6 +49,6 @@ class TopicsController < ApplicationController
 
   def correct_user
     @topic = current_user.topics.find_by(id: params[:id])
-    redirect_to root_url if @topic.nil?
+    redirect_to root_path if @topic.nil?
   end
 end

@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "Topics", type: :request do
   let(:user) { create(:user) }
-  let(:topic) { create(:topic) }
+  let(:other_user) { create(:user) }
+  let!(:topic) { create(:topic, user: user) }
   let(:topic_params) { { title: 'テストトピックタイトル', description: 'テストトピックです。' } }
 
   describe "#show" do
@@ -59,6 +60,112 @@ RSpec.describe "Topics", type: :request do
           post topics_path, params: { topic: topic_params }
         end.not_to change(user.topics, :count)
         expect(response).to redirect_to '/users/sign_in'
+      end
+    end
+  end
+
+  describe '#edit' do
+    context 'ログイン済ユーザー' do
+      context 'トピック所有者の場合' do
+        before do
+          sign_in user
+          get edit_topic_path(topic.id)
+        end
+
+        example 'レスポンスが正常に表示されること' do
+          expect(response).to have_http_status(200)
+        end
+      end
+
+      context 'トピック所有者でない場合' do
+        before do
+          sign_in other_user
+          get edit_topic_path(topic.id)
+        end
+
+        example 'homeページにリダイレクトされる' do
+          expect(response).to redirect_to root_path
+        end
+      end
+    end
+
+    context 'ログインしていないユーザー' do
+      example 'ログインページにリダイレクトされること' do
+        get edit_topic_path(topic.id)
+        expect(response).to have_http_status '302'
+        expect(response).to redirect_to '/users/sign_in'
+      end
+    end
+  end
+
+  describe '#update' do
+    context 'ログイン済ユーザー' do
+      context 'トピック所有者の場合' do
+        before do
+          sign_in user
+        end
+
+        example '自分のトピックを更新できる' do
+          topic_params = attributes_for(:topic, {
+            title: 'テストトピックタイトル更新',
+          })
+          patch topic_path(topic.id), params: { topic: topic_params }
+          expect(topic.reload.title).to eq 'テストトピックタイトル更新'
+          redirect_to topic_path(topic)
+        end
+      end
+
+      context 'トピック所有者でない場合' do
+        before do
+          sign_in other_user
+        end
+
+        example 'homeページにリダイレクトされる' do
+          topic_params = attributes_for(:topic, {
+            title: 'テストトピックタイトル更新',
+          })
+          patch topic_path(topic.id), params: { topic: topic_params }
+          expect(topic.reload.title).not_to eq 'テストトピックタイトル更新'
+          redirect_to root_path
+        end
+      end
+    end
+
+    context 'ログインしていないユーザー' do
+      example 'ログインページにリダイレクトされること' do
+        patch topic_path(topic.id)
+        expect(response).to have_http_status '302'
+        expect(response).to redirect_to '/users/sign_in'
+      end
+    end
+  end
+
+  describe '#destroy' do
+    context 'ログイン済ユーザー' do
+      context 'トピック所有者の場合' do
+        before do
+          sign_in user
+        end
+
+        example 'トピックを削除できる' do
+          expect do
+            delete topic_path(topic.id)
+          end.to change(user.topics, :count).by(-1)
+          redirect_to user_path(user)
+        end
+      end
+
+      context 'トピック所有者でない場合' do
+        before do
+          sign_in other_user
+        end
+
+        example 'homeページにリダイレクトされる' do
+          expect do
+            delete topic_path(topic.id)
+          end.to change(user.topics, :count).by(0)
+          redirect_to root_path
+        end
       end
     end
   end
