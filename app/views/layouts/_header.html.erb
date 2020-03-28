@@ -5,27 +5,34 @@
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li>
-            新規スレッド
+            <i class="far fa-plus-square"></i>新規スレッド
           </li>
           <li>
             <%= link_to user_path(current_user)  do %>
-              マイページ
+              <i class="fas fa-user-circle"></i>マイページ
             <% end %>
           </li>
           <li>
             <%= link_to logout_path, method: :delete do %>
-              ログアウト
+              <i class="fas fa-sign-out-alt"></i>ログアウト
             <% end %>
           </li>
         <% else %>
           <li>
             <%= link_to signup_path do %>
-              新規登録
+              <i class="fas fa-user-plus"></i>新規登録
             <% end %>
           </li>
           <li>
             <%= link_to login_path do %>
-              ログイン
+              <i class="fas fa-sign-in-alt"></i>ログイン
+            <% end %>
+          </li>
+          <li>
+            <%= form_for(:user, url: login_path) do |f| %>
+              <%= f.hidden_field :email, value: 'noticeboard@example.com' %>
+              <%= f.hidden_field :password, value: 'noticeboard' %>
+              <%= f.submit 'テストログイン', class: "testlogin-btn" %>
             <% end %>
           </li>
         <% end %>

@@ -10,7 +10,7 @@ RSpec.describe 'Session', type: :system do
 
     context '入力値が正しいとき' do
       example 'ログインに成功すること', js: true do
-        fill_in '名前またはメールアドレス', with: user.name
+        fill_in 'メールアドレス', with: user.email
         fill_in 'パスワード', with: user.password
         click_button 'ログイン'
         expect(page).to have_current_path user_path(user.id)
@@ -20,10 +20,10 @@ RSpec.describe 'Session', type: :system do
 
     context '入力値が正しくないとき' do
       example 'ログインに失敗すること' do
-        fill_in '名前またはメールアドレス', with: user.name
+        fill_in 'メールアドレス', with: user.email
         fill_in 'パスワード', with: ''
         click_button 'ログイン'
-        expect(page).to have_content 'アカウント情報またはパスワードが違います。'
+        expect(page).to have_content 'メールアドレスまたはパスワードが違います。'
       end
     end
   end
