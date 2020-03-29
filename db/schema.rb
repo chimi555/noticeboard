@@ -10,10 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_28_125348) do
+ActiveRecord::Schema.define(version: 2020_03_29_064828) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string "category_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_name"], name: "index_categories_on_category_name", unique: true
+  end
 
   create_table "comments", force: :cascade do |t|
     t.text "content"
@@ -23,6 +30,16 @@ ActiveRecord::Schema.define(version: 2020_03_28_125348) do
     t.datetime "updated_at", null: false
     t.index ["topic_id"], name: "index_comments_on_topic_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "topic_categories", force: :cascade do |t|
+    t.integer "topic_id"
+    t.integer "category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_topic_categories_on_category_id"
+    t.index ["topic_id", "category_id"], name: "index_topic_categories_on_topic_id_and_category_id", unique: true
+    t.index ["topic_id"], name: "index_topic_categories_on_topic_id"
   end
 
   create_table "topics", force: :cascade do |t|
