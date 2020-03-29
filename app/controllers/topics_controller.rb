@@ -27,11 +27,14 @@ class TopicsController < ApplicationController
 
   def edit
     @topic = Topic.find(params[:id])
+    @category_list = @topic.categories.pluck(:category_name).join(",")
   end
 
   def update
     @topic = Topic.find(params[:id])
+    category_list = params[:category_list].split(",")
     if @topic.update_attributes(topic_params)
+      @topic.save_categories(category_list)
       flash[:success] = "トピックが更新されました！"
       redirect_to topic_path(@topic.id)
     else

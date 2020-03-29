@@ -6,6 +6,12 @@
       <div class="field topic-form-tit">
         <%= f.text_field :title, placeholder: "タイトル【必須】", class: 'form-wide form-control' %>
       </div>
+      <div class="topic-form-categories">
+        <%= f.label "カテゴリー" %>
+        <ul id="topic-categories">
+        </ul>
+        <%= hidden_field_tag :category_hidden, @category_list %>
+      </div>
       <div class="field">
         <%= f.text_area :description, placeholder: "トピック概要説明", class: 'form-wide form-control' %>
       </div>
