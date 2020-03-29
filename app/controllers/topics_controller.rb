@@ -5,7 +5,7 @@ class TopicsController < ApplicationController
   def show
     @topic = Topic.find(params[:id])
     @comment = Comment.new
-    @comments = @topic.comments.page(params[:page]).per(MAX_OF_DISPLAY)
+    @comments = @topic.comments.includes([:user]).page(params[:page]).per(MAX_OF_DISPLAY)
   end
 
   def new
