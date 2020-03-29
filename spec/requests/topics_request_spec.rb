@@ -111,7 +111,7 @@ RSpec.describe "Topics", type: :request do
           })
           patch topic_path(topic.id), params: { topic: topic_params }
           expect(topic.reload.title).to eq 'テストトピックタイトル更新'
-          redirect_to topic_path(topic)
+          expect(response).to redirect_to topic_path(topic)
         end
       end
 
@@ -126,7 +126,7 @@ RSpec.describe "Topics", type: :request do
           })
           patch topic_path(topic.id), params: { topic: topic_params }
           expect(topic.reload.title).not_to eq 'テストトピックタイトル更新'
-          redirect_to root_path
+          expect(response).to redirect_to root_path
         end
       end
     end
@@ -151,7 +151,7 @@ RSpec.describe "Topics", type: :request do
           expect do
             delete topic_path(topic.id)
           end.to change(user.topics, :count).by(-1)
-          redirect_to user_path(user)
+          expect(response).to redirect_to user_path(user)
         end
       end
 
@@ -164,7 +164,7 @@ RSpec.describe "Topics", type: :request do
           expect do
             delete topic_path(topic.id)
           end.to change(user.topics, :count).by(0)
-          redirect_to root_path
+          expect(response).to redirect_to root_path
         end
       end
     end
