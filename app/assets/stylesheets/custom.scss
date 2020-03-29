@@ -124,6 +124,7 @@ header {
 }
 
 /*footer*/
+
 footer {
   margin-top: 60px;
   padding: 10px 0;
@@ -133,6 +134,7 @@ footer {
 }
 
 /* user form */
+
 .user-form{
   max-width: 700px;
   margin: 0 auto;
@@ -144,4 +146,38 @@ footer {
 .user-form-text{
   margin: 15px 0;
   text-align: center;
+}
+
+/* topic show */
+.topic-comment-form{
+  margin-bottom: 50px;
+  padding-bottom: 20px;
+  border-bottom: solid 2px rgba(0,0,0,0.3);;
+  .comment-text-area{
+    line-height: 3.5em;
+  }
+  .actions{
+    text-align: right;
+    margin-top: 10px;
+  }
+}
+
+.comment{
+  background: #fff;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 20px;
+  position: relative;
+  .comment-info{
+    font-size: 1.1em;
+    padding-bottom: 10px;
+    .comment-user{
+      font-weight: 600;
+    }
+  }
+  .comment-delete{
+    position: absolute;
+    right: 15px;
+    bottom: 10px;
+  }
 }

@@ -4,6 +4,8 @@ class TopicsController < ApplicationController
 
   def show
     @topic = Topic.find(params[:id])
+    @comment = Comment.new
+    @comments = @topic.comments.includes([:user]).page(params[:page]).per(MAX_OF_DISPLAY)
   end
 
   def new
@@ -36,6 +38,7 @@ class TopicsController < ApplicationController
   end
 
   def destroy
+    @topic = Topic.find(params[:id])
     @topic.destroy
     flash[:success] = 'トピックが削除されました。'
     redirect_to current_user

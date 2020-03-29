@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  MAX_OF_DISPLAY_RECENT_TOPICS = 10
+  MAX_OF_DISPLAY = 10
 
   protected
 
