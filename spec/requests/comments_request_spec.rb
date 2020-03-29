@@ -21,7 +21,7 @@ RSpec.describe "Comments", type: :request do
     context 'ログインしていないユーザー' do
       example '新しいコメントが登録できないこと' do
         expect do
-          post topic_comments_path(topic.id), params: { comment: { content: 'テストコメントです。'} }
+          post topic_comments_path(topic.id), params: { comment: { content: 'テストコメントです。' } }
         end.not_to change(topic.comments, :count)
       end
     end

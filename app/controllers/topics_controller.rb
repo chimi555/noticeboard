@@ -46,12 +46,12 @@ class TopicsController < ApplicationController
 
   private
 
-    def topic_params
-      params.require(:topic).permit(:title, :description)
-    end
+  def topic_params
+    params.require(:topic).permit(:title, :description)
+  end
 
-    def correct_user
-      @topic = current_user.topics.find_by(id: params[:id])
-      redirect_to root_path if @topic.nil?
-    end
+  def correct_user
+    @topic = current_user.topics.find_by(id: params[:id])
+    redirect_to root_path if @topic.nil?
+  end
 end

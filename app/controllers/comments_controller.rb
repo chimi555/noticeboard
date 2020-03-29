@@ -29,12 +29,12 @@ class CommentsController < ApplicationController
 
   private
 
-    def comment_params
-      params.require(:comment).permit(:content)
-    end
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
 
-    def correct_comment_user
-      @comment = current_user.comments.find_by(id: params[:id])
-      redirect_to root_path if @comment.nil?
-    end
+  def correct_comment_user
+    @comment = current_user.comments.find_by(id: params[:id])
+    redirect_to root_path if @comment.nil?
+  end
 end

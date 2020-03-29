@@ -40,7 +40,7 @@ RSpec.describe 'Comments', type: :system do
         end
       end
 
-      example 'コメントが削除できること', js:true do
+      example 'コメントが削除できること', js: true do
         within(".comment") do
           click_on '削除'
         end
