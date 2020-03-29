@@ -15,7 +15,9 @@
       <p class="comment-content"><%= comment.content %></p>
       <% if current_user?(comment.user) %>
         <span class="comment-delete">
-          <%= link_to '削除', topic_comment_path(comment.topic_id, comment.id), method: :delete %>
+          <%= link_to topic_comment_path(comment.topic_id, comment.id), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+            <i class="far fa-trash-alt"></i>削除
+          <% end %>
         </span>
       <% end %>
     <% end %>
