@@ -42,6 +42,8 @@ RSpec.describe "Topics", type: :request do
   end
 
   describe '#create' do
+    let!(:category_list) { "ニュース" }
+
     context 'ログイン済ユーザー' do
       before do
         sign_in user
@@ -49,7 +51,7 @@ RSpec.describe "Topics", type: :request do
 
       example '新しいトピックが登録できること' do
         expect do
-          post topics_path, params: { topic: topic_params }
+          post topics_path, params: { topic: topic_params, category_list: category_list }
         end.to change(user.topics, :count).by(1)
       end
     end
@@ -99,6 +101,8 @@ RSpec.describe "Topics", type: :request do
   end
 
   describe '#update' do
+    let!(:category_list) { "医療" }
+
     context 'ログイン済ユーザー' do
       context 'トピック所有者の場合' do
         before do
@@ -109,7 +113,7 @@ RSpec.describe "Topics", type: :request do
           topic_params = attributes_for(:topic, {
             title: 'テストトピックタイトル更新',
           })
-          patch topic_path(topic.id), params: { topic: topic_params }
+          patch topic_path(topic.id), params: { topic: topic_params, category_list: category_list }
           expect(topic.reload.title).to eq 'テストトピックタイトル更新'
           expect(response).to redirect_to topic_path(topic)
         end
