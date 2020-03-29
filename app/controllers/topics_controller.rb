@@ -14,7 +14,9 @@ class TopicsController < ApplicationController
 
   def create
     @topic = current_user.topics.build(topic_params)
+    category_list = params[:category_list].split(",")
     if @topic.save
+      @topic.save_categories(category_list)
       flash[:success] = '新しいトピックが登録されました!'
       redirect_to topic_path(@topic.id)
     else
