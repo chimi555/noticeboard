@@ -1,6 +1,7 @@
 class TopicsController < ApplicationController
   before_action :authenticate_user!, only: [:create, :new, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_available_categories, only: [:edit, :new]
 
   def show
     @topic = Topic.find(params[:id])
@@ -58,5 +59,9 @@ class TopicsController < ApplicationController
   def correct_user
     @topic = current_user.topics.find_by(id: params[:id])
     redirect_to root_path if @topic.nil?
+  end
+
+  def set_available_categories
+    @all_category_list = Category.all.pluck(:category_name)
   end
 end

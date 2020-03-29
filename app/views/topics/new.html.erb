@@ -20,3 +20,9 @@
     <% end %>
   </div>
 </div>
+
+<%= javascript_tag do %>
+var Topic = {
+  all_category_list: <%= raw @all_category_list %>
+};
+<% end %>

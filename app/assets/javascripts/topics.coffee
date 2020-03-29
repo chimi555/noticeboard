@@ -2,6 +2,7 @@ $(document).on 'turbolinks:load', ->
   $('#topic-categories').tagit
     fieldName:   'category_list'
     singleField: true
+    availableTags: Topic.all_category_list
   $('#topic-categories').tagit()
   category_string = $("#category_hidden").val()
   try
