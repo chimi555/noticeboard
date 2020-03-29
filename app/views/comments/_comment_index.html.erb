@@ -1,0 +1,18 @@
+<% @comments.each do |comment| %>
+  <div class="comment">
+    <% unless comment.id.nil? %>
+      <span class="comment-user">
+        <%= link_to user_path(comment.user.id) do %>
+          <%= comment.user.name %>
+        <% end %>
+      </span>
+      <span class="comment-time">
+        <%= comment.created_at.strftime("%Y年%m月%d日%H:%M") %>
+      </span>
+      <p class="comment-content"><%= comment.content %></p>
+      <% if current_user?(comment.user) %>
+        <span><%= link_to 'コメントを削除する', topic_comment_path(comment.topic_id, comment.id), method: :delete%></span>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
