@@ -7,6 +7,9 @@ class TopicsController < ApplicationController
     if params[:category_id]
       @selected_category = Category.find(params[:category_id])
       @topics = Topic.from_category(params[:category_id]).page(params[:page]).per(MAX_OF_DISPLAY)
+    elsif params[:q]
+      @topics = @search.result.page(params[:page]).per(MAX_OF_DISPLAY)
+      @search_word = params[:q][:title_or_description_or_comments_content_cont]
     else
       @topics = Topic.page(params[:page]).per(MAX_OF_DISPLAY)
     end

@@ -3,6 +3,7 @@
     <%= link_to "NoticeBoard", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
+        <%= render "shared/search_form" %>
         <% if user_signed_in? %>
           <li>
             <%= link_to new_topic_path do %>
