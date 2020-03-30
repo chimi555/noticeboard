@@ -1,6 +1,7 @@
 <header class="navbar navbar-expand-md navbar-fixed-top">
   <div class="container">
     <%= link_to "NoticeBoard", root_path, id: "logo" %>
+    <%= render "shared/search_form" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>

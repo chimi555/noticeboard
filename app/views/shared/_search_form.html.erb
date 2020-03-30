@@ -1,0 +1,6 @@
+<div class="search-form mx-auto">
+  <%= search_form_for @search, url: topics_path do |f|%>
+    <%= f.search_field :title_or_description_or_comments_content_cont, placeholder: "トピック検索", class: "serch-field input-xlarge" %>
+    <% f.submit "検索" %>
+  <% end %>
+</div>
