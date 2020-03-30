@@ -146,7 +146,8 @@ RSpec.describe 'Topics', type: :system do
         visit root_path
         within("header") do
           fill_in 'トピック検索', with: '検索テスト'
-          click_on '検索'
+          link = find('.search-btn')
+          link.click
         end
       end
 
