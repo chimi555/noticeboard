@@ -95,7 +95,6 @@ p{
 }
 
 /* header */
-
 header {
   padding: 5px 0 5px;
   background-color: #ef5e09eb;
@@ -136,7 +135,6 @@ header {
 }
 
 /*footer*/
-
 footer {
   margin-top: 60px;
   padding: 10px 0;
@@ -250,7 +248,7 @@ footer {
   background: #fff;
   border-radius: 5px;
   padding: 20px 20px 40px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
   position: relative;
   .topic-show-tit{
     border-bottom: dashed 2px rgba(0,0,0,0.3);
@@ -286,7 +284,16 @@ footer {
   }
 }
 
+.topic-show-edit{
+  text-align: right;
+  margin-bottom: 20px;
+  span{
+    padding: 0 10px;
+  }
+}
+
 .topic-show-area{
+  margin-top: 30px;
   padding: 0 20px;
 }
 
