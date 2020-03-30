@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @topics = @user.topics.page(params[:page]).per(MAX_OF_DISPLAY)
+    @topics = @user.topics.includes([:categories, :topic_categories]).page(params[:page]).per(MAX_OF_DISPLAY)
     @categories = Category.all
   end
 end
