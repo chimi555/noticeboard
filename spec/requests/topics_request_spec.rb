@@ -4,7 +4,22 @@ RSpec.describe "Topics", type: :request do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
   let!(:topic) { create(:topic, user: user) }
+  let!(:other_topic) { create(:topic, user: other_user) }
   let(:topic_params) { { title: 'テストトピックタイトル', description: 'テストトピックです。' } }
+
+  describe "#index" do
+    before do
+      get topics_path
+    end
+
+    example 'レスポンスが正常に表示されること' do
+      expect(response).to have_http_status(200)
+    end
+
+    example 'インスタンス変数@topicsが存在すること' do
+      expect(assigns(:topics)).to eq [topic, other_topic]
+    end
+  end
 
   describe "#show" do
     before do

@@ -3,7 +3,11 @@ require 'rails_helper'
 RSpec.describe 'Topics', type: :system do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
-  let!(:topic) { create(:topic, user: user) }
+  let!(:topic) { create(:topic, user: user, updated_at: 3.day.ago.to_s) }
+  let!(:other_topic) { create(:topic, updated_at: 2.day.ago.to_s) }
+  let!(:topics) { create_list(:topic, 9, updated_at: 1.day.ago.to_s) }
+  let!(:category) { create(:category, category_name: "ニュース") }
+  let!(:topic_category) { create(:topic_category, topic: topic, category: category) }
 
   describe "新規トピック作成機能" do
     before do
@@ -111,6 +115,59 @@ RSpec.describe 'Topics', type: :system do
 
       example '削除ボタンが表示されないこと' do
         expect(page).not_to have_link "削除"
+      end
+    end
+  end
+
+  describe "トピック一覧表示機能" do
+    context 'カテゴリーが選択されているとき' do
+      before do
+        visit topics_path(category_id: category.id)
+      end
+
+      example '正しいカテゴリー名が表示されること' do
+        expect(page).to have_content "トピック一覧"
+        expect(page).to have_content "カテゴリー：#{category.category_name}"
+      end
+
+      example "選択したカテゴリーに属したトピックが表示されること" do
+        expect(page).to have_link href: topic_path(topic.id)
+      end
+
+      example "選択したカテゴリーに属していないトピックは表示されないこと" do
+        expect(page).not_to have_link href: topic_path(other_topic.id)
+      end
+    end
+
+    context '検索ワードが入力されているとき', js: true do
+      let!(:search_topic) { create(:topic, title: "検索テスト用トピックです") }
+
+      before do
+        visit root_path
+        within("header") do
+          fill_in 'トピック検索', with: '検索テスト'
+          click_on '検索'
+        end
+      end
+
+      example "検索ワードを含むトピックが表示されること" do
+        expect(page).to have_link href: topic_path(search_topic.id)
+      end
+
+      example "検索ワードを含まないトピックは表示されないこと" do
+        expect(page).not_to have_link href: topic_path(other_topic.id)
+      end
+    end
+
+    context '何も選択されていないとき', js: true do
+      before do
+        visit topics_path
+      end
+
+      example "最新の10件のトピックが表示されること" do
+        expect(page).to have_link href: topic_path(other_topic.id)
+        expect(page).not_to have_link href: topic_path(topic.id)
+        expect(page).to have_css '.topic-title', count: 10
       end
     end
   end
