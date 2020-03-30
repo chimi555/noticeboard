@@ -6,9 +6,13 @@
 <div class="container">
   <h2 class="page-tit">
     <% if @selected_category.present? %>
+      <p>トピック一覧</p>
       <%= "カテゴリー：#{@selected_category.category_name}" %>
+    <% elsif @search_word.present? %> 
+      <p>トピック一覧</p>
+      <%= "検索：#{@search_word}" %>
     <% else %>
-      トピック一覧
+      <p>トピック一覧</p>
     <% end %>
   </h2>
   <ol class="topics">
