@@ -8,7 +8,7 @@
 body{
   padding-top: 100px;
   padding-bottom: 50px;
-  background-color: #ebedfc
+  background-color: #efefef;
 }
 
 section{
@@ -153,10 +153,54 @@ footer {
 }
 
 /* topic show */
+.topic-show-head{
+  background: #fff;
+  border-radius: 5px;
+  padding: 20px 20px 40px;
+  margin-bottom: 30px;
+  position: relative;
+  .topic-show-tit{
+    border-bottom: dashed 2px rgba(0,0,0,0.3);
+  }
+  .topic-show-time{
+    text-align: right;
+  }
+  .topic-show-description{
+    padding: 10px;
+    margin: 10px 0;
+  }
+  .topic-show-user{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+  }
+  .topic-show-category{
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+    ul{
+      display: inline-block;
+      li{
+        background: rgba(0,0,0,0.5);
+        padding: 5px;
+        border-radius: 3px;
+        display: inline-block;
+        a{
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.topic-show-area{
+  padding: 0 20px;
+}
+
 .topic-comment-form{
   margin-bottom: 50px;
   padding-bottom: 20px;
-  border-bottom: solid 2px rgba(0,0,0,0.3);;
+  border-bottom: solid 2px rgba(0,0,0,0.3);
   .comment-text-area{
     line-height: 3.5em;
   }
