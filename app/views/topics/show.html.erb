@@ -38,9 +38,11 @@
     </div>
   <% end %>
   <div class="topic-show-area">
-    <div class="topic-comment-form">
-      <%= render "comments/comment_form", topic: @topic, comment: @comment %>
-    </div>
+    <% if user_signed_in? %>
+      <div class="topic-comment-form">
+        <%= render "comments/comment_form", topic: @topic, comment: @comment %>
+      </div>
+    <% end %>
     <div id="comment-index"　class="topic-comment-show">
       <%= render "comments/comment_index", comments: @comments %>
     </div>

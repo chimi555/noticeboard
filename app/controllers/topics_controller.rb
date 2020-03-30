@@ -6,7 +6,10 @@ class TopicsController < ApplicationController
   def index
     if params[:category_id]
       @selected_category = Category.find(params[:category_id])
-      @topics = Topic.from_category(params[:category_id]).includes([:categories, :topic_categories]).page(params[:page]).per(MAX_OF_DISPLAY)
+      @topics = Topic.from_category(params[:category_id]).
+        includes([:categories, :topic_categories]).
+        page(params[:page]).
+        per(MAX_OF_DISPLAY)
     elsif params[:q]
       @topics = @search.result.includes([:categories, :topic_categories]).page(params[:page]).per(MAX_OF_DISPLAY)
       @search_word = params[:q][:title_or_description_or_comments_content_cont]
