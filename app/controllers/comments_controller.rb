@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     if @comment.save
       flash[:success] = '新しいコメントを投稿しました!'
-      redirect_to topic_path(@topic)
+      render :comment_index
     else
       flash[:danger] = '新しいコメントの投稿に失敗しました。'
       redirect_to topic_path(@topic)
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     if @comment.destroy
       flash[:success] = 'コメントを削除しました。'
-      redirect_to topic_path(@topic)
+      render :comment_index
     else
       flash[:danger] = 'コメントの削除に失敗しました。'
       redirect_to topic_path(@topic)
