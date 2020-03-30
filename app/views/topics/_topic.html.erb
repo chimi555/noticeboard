@@ -1,13 +1,27 @@
-<li id="topic-<%= topic.id %>">
+<li id="topic-<%= topic.id %>" class="topic-wrap">
   <%= link_to topic do %>
     <div class="topic-title">
       <%= topic.title %>
     </div>
-    <div class="topic-description">
-      <%= topic.description %>
+    <div class="topic-time">
+      <%= topic.updated_at.strftime("%Y年%m月%d日%H:%M") %>
     </div>
-    <span class="topic-time">
-      <%= time_ago_in_words(topic.created_at) %>前
-    </span>
+    <div class="topic-description">
+      <%= truncate(topic.description, length: 100, omission: ".....") %>
+    </div>
+    <div class="topic-bottom">
+      <div class="topic-category">
+        <ul>
+          <% topic.categories.each do |category| %>
+            <li>
+              <%= link_to category.category_name, topics_path(category_id: category.id) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="topic-count">
+        <i class="fas fa-comment"></i><%= topic.comments.count %>
+      </div>
+    </div>
   <% end %>
 </li>

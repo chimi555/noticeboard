@@ -13,6 +13,7 @@ class TopicsController < ApplicationController
     else
       @topics = Topic.page(params[:page]).per(MAX_OF_DISPLAY)
     end
+    @categories = Category.all
   end
 
   def show
