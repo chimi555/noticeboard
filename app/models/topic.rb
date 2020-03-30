@@ -9,6 +9,7 @@ class Topic < ApplicationRecord
   validates :title, presence: true, length: { maximum: 50 }
   validates :description, length: { maximum: 200 }
 
+  default_scope -> { order(updated_at: :desc) }
   scope :from_category, -> (category_id) { where(id: TopicCategory.where(category_id: category_id).select(:topic_id)) }
 
   # カテゴリー更新処理
