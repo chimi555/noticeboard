@@ -1,35 +1,46 @@
 <% provide(:title, @topic.title) %>
 <div class="container">
-  <div class="topic-show-area">
+  <div class="topic-show-head">
     <h2 class="page-tit topic-show-tit"><%= @topic.title %></h2>
+    <div class="topic-show-time">
+      <%= @topic.created_at.strftime("%Y年%m月%d日%H:%M") %>
+    </div>
     <div class="topic-show-description">
        <%= @topic.description %>
     </div>
     <div class="topic-show-user">
        <%= @topic.user.name %>
     </div>
-    <span class="topic-show-time">
-      <%= @topic.created_at.strftime("%Y年%m月%d日%H:%M") %>
-    </span>
-  </div>
-  <% if current_user?(@topic.user) %>
-    <div class="topic-show-edit">
-      <span class="btn">
-        <%= link_to edit_topic_path(@topic) do %>
-          <i class="fas fa-edit"></i>編集
+    <div class="topic-show-category">
+      <ul>
+        <% @topic.categories.each do |category| %>
+          <li>
+            <%= link_to category.category_name, topics_path(category_id: category.id) %>
+          </li>
         <% end %>
-      </span>
-      <span class="btn">
-        <%= link_to @topic, method: :delete, data: { confirm: "本当に削除しますか？" } do %>
-          <i class="far fa-trash-alt"></i>削除
-        <% end %>
-      </span>
+      </ul>
     </div>
-  <% end %>
-  <div class="topic-comment-form">
-    <%= render "comments/comment_form", topic: @topic, comment: @comment %>
   </div>
-  <div class="topic-comment-show">
-    <%= render "comments/comment_index", comments: @comments %>
+  <div class="topic-show-area">
+    <% if current_user?(@topic.user) %>
+      <div class="topic-show-edit">
+        <span class="btn">
+          <%= link_to edit_topic_path(@topic) do %>
+            <i class="fas fa-edit"></i>編集
+          <% end %>
+        </span>
+        <span class="btn">
+          <%= link_to @topic, method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+            <i class="far fa-trash-alt"></i>削除
+          <% end %>
+        </span>
+      </div>
+    <% end %>
+    <div class="topic-comment-form">
+      <%= render "comments/comment_form", topic: @topic, comment: @comment %>
+    </div>
+    <div class="topic-comment-show">
+      <%= render "comments/comment_index", comments: @comments %>
+    </div>
   </div>
 </div>

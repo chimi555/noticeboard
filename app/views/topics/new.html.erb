@@ -6,6 +6,11 @@
       <div class="field topic-form-tit">
         <%= f.text_field :title, placeholder: "タイトル【必須】", class: 'form-wide form-control' %>
       </div>
+      <div class="topic-form-categories">
+        <%= f.label "カテゴリー" %>
+        <ul id="topic-categories">
+        </ul>
+      </div>
       <div class="field">
         <%= f.text_area :description, placeholder: "トピック概要説明", class: 'form-wide form-control' %>
       </div>
@@ -15,3 +20,9 @@
     <% end %>
   </div>
 </div>
+
+<%= javascript_tag do %>
+var Topic = {
+  all_category_list: <%= raw @all_category_list %>
+};
+<% end %>

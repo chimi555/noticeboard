@@ -16,11 +16,12 @@ RSpec.describe 'Topics', type: :system do
     end
 
     context '入力値が正しい場合' do
-      example '新規登録が成功すること' do
+      example '新規登録が成功すること', js: true do
         expect do
           within(".topic-form") do
             fill_in 'topic[title]', with: 'testトピック'
             fill_in 'topic[description]', with: 'これはtestトピックです'
+            fill_in 'tag', with: 'テストカテゴリー'
             click_button '作成する'
           end
         end.to change(Topic, :count).by(1)
@@ -29,11 +30,12 @@ RSpec.describe 'Topics', type: :system do
     end
 
     context '入力値が正しくない場合' do
-      example '新規登録が失敗すること' do
+      example '新規登録が失敗すること', js: true do
         expect do
           within(".topic-form") do
             fill_in 'topic[title]', with: ''
             fill_in 'topic[description]', with: 'これはtestトピックです'
+            fill_in 'tag', with: 'テストカテゴリー'
             click_button '作成する'
           end
         end.to change(Topic, :count).by(0)
@@ -54,10 +56,11 @@ RSpec.describe 'Topics', type: :system do
       end
 
       context '正しい入力値' do
-        example 'トピックが更新できること' do
+        example 'トピックが更新できること', js: true do
           click_on '編集'
           within(".topic-form") do
             fill_in 'topic[title]', with: 'testトピック更新'
+            fill_in 'tag', with: 'newカテゴリー'
             click_on '更新する'
           end
           expect(page).to have_content 'トピックが更新されました！'
