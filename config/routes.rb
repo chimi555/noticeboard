@@ -1,3 +1,18 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'static_pages#home'
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+  }
+  devise_scope :user do
+    get '/signup', to: 'users/registrations#new'
+    post '/signup', to: 'users/registrations#create'
+    get '/login', to: 'users/sessions#new'
+    post '/login', to: 'users/sessions#create'
+    delete '/logout', to: 'users/sessions#destroy'
+  end
+  resources :users, only: [:show]
+  resources :topics do
+    resources :comments
+  end
 end

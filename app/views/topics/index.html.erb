@@ -1,0 +1,29 @@
+<% if @selected_category.present? %>
+  <% provide(:title, @selected_category.category_name ) %>
+<% else %>
+  <% provide(:title, 'トピック一覧') %>
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 topic-area">
+      <h2 class="page-tit">
+        <% if @selected_category.present? %>
+          <p>トピック一覧</p>
+          <%= "カテゴリー：#{@selected_category.category_name}" %>
+        <% elsif @search_word.present? %> 
+          <p>トピック一覧</p>
+          <%= "検索：#{@search_word}" %>
+        <% else %>
+          <p>トピック一覧</p>
+        <% end %>
+      </h2>
+      <ol class="topics">
+        <%= render @topics %>
+      </ol>
+      <%= paginate @topics %>
+    </div>
+    <div class="col-md-4">
+      <%= render "shared/category_index", categories: @categories %>
+    </div>
+  </div>
+</div>
