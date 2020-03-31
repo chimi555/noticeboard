@@ -7,11 +7,13 @@ class CommentsController < ApplicationController
     @comment = @topic.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      flash[:success] = '新しいコメントを投稿しました!'
-      render :comment_index
+      respond_to do |format|
+        format.html { redirect_to @topic }
+        format.js
+      end
     else
       flash[:danger] = '新しいコメントの投稿に失敗しました。'
-      redirect_to topic_path(@topic)
+      redirect_to root_path
     end
   end
 
@@ -19,11 +21,13 @@ class CommentsController < ApplicationController
     @topic = Topic.find(params[:topic_id])
     @comment = Comment.find(params[:id])
     if @comment.destroy
-      flash[:success] = 'コメントを削除しました。'
-      render :comment_index
+      respond_to do |format|
+        format.html { redirect_to @topic }
+        format.js
+      end
     else
       flash[:danger] = 'コメントの削除に失敗しました。'
-      redirect_to topic_path(@topic)
+      redirect_to root_path
     end
   end
 
