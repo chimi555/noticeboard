@@ -110,17 +110,22 @@ header {
 }
 
 .search-form{
-  padding-top: 18px;
+  padding-top: 20px;
+  display: inline-block;
 }
 
 .navbar-right{
   float: right;
-  padding-top: 20px 15px ;
+  padding-top: 20px;
   li{
     float: left;
     text-decoration: none;
     a{
       color: #fff;
+    }
+    a:hover{
+      background-color: #ef5e09eb;
+      border-bottom: solid 1px #fff;
     }
   }
   .testlogin-btn{
@@ -132,6 +137,10 @@ header {
     font-size: 15px;
     color: rgba(0,0,0,0.7);
   }
+}
+
+.navbar-toggler{
+  display: none;
 }
 
 /*footer*/
@@ -395,5 +404,36 @@ footer {
     position: absolute;
     right: 15px;
     bottom: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  header{
+    position: relative;
+    .navbar-toggler{
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: #fff;
+      display: block;
+      i{
+        font-size: 18px;
+      }
+    }
+    .navbar-collapse{
+      border-top: none;
+      box-shadow: none;
+    }
+    #Navber{
+      padding-top: 45px;
+    }
+  }
+}
+
+@media (max-width: 612px) {
+  header{
+    #Navber{
+      padding-top: 0px;
+    }
   }
 }
