@@ -31,13 +31,6 @@
               <i class="fas fa-sign-in-alt"></i>ログイン
             <% end %>
           </li>
-          <li>
-            <%= form_for(:user, url: login_path) do |f| %>
-              <%= f.hidden_field :email, value: 'noticeboard@example.com' %>
-              <%= f.hidden_field :password, value: 'noticeboard' %>
-              <%= f.submit 'テストログイン', class: "testlogin-btn" %>
-            <% end %>
-          </li>
         <% end %>
       </ul>
     </nav>

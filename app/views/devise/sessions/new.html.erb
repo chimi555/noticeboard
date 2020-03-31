@@ -2,6 +2,13 @@
 <div class="container">
   <h2 class="page-tit">ログイン</h2>
   <div class="user-form">
+    <div class="user-form-test">
+      <%= form_for(:user, url: login_path) do |f| %>
+        <%= f.hidden_field :email, value: 'noticeboard@example.com' %>
+        <%= f.hidden_field :password, value: 'noticeboard' %>
+        <%= f.submit 'テストログインはこちらから', class: "testlogin-btn" %>
+      <% end %>
+    </div>
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <%= f.label :email, 'メールアドレス' %><br />

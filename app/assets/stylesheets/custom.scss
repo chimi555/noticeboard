@@ -229,6 +229,23 @@ footer {
     text-align: right;
   }
 }
+.user-form-test{
+  text-align: center;
+  margin-bottom: 70px;
+  .testlogin-btn{
+    text-align: center;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px 20px;
+    background: rgba(0,0,0,0.6);;
+    color: #fff;
+  }
+  .testlogin-btn:hover {
+    background: rgba(0,0,0,0.4);
+    border: solid 2px #ef5e09eb;
+  }
+}
 
 /* topic form */
 .topic-form{
