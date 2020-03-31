@@ -12,14 +12,13 @@ RSpec.describe 'Comments', type: :system do
     end
 
     context 'ログインユーザー' do
-      example 'コメント投稿が成功すること' do
+      example 'コメント投稿が成功すること', js: true do
         expect do
           within(".topic-comment-form") do
             fill_in 'comment[content]', with: 'テストコメントです！'
             click_on '投稿'
           end
         end.to change(topic.comments, :count).by(1)
-        expect(page).to have_content '新しいコメントを投稿しました!'
         expect(page).to have_content 'テストコメントです！'
       end
     end
@@ -45,7 +44,6 @@ RSpec.describe 'Comments', type: :system do
           click_on '削除'
         end
         page.driver.browser.switch_to.alert.accept
-        expect(page).to have_content 'コメントを削除しました。'
         expect(topic.comments.count).to eq 0
       end
     end
