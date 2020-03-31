@@ -1,0 +1,14 @@
+<div class="category-area">
+  <p>カテゴリー</p>
+  <% unless categories.blank? %>
+    <ul>
+      <% categories.each do |category| %>
+        <li>
+          <%= link_to topics_path(category_id: category.id) do %>
+            - <%= category.category_name %>(<%= category.topics.count %>)
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

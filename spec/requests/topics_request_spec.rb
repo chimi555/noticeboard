@@ -15,10 +15,6 @@ RSpec.describe "Topics", type: :request do
     example 'レスポンスが正常に表示されること' do
       expect(response).to have_http_status(200)
     end
-
-    example 'インスタンス変数@topicsが存在すること' do
-      expect(assigns(:topics)).to eq [topic, other_topic]
-    end
   end
 
   describe "#show" do

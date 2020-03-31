@@ -1,8 +1,6 @@
 <%= provide(:title, @user.name)%>
 <div class="container">
   <div class="row">
-    <div class="col-md-4 user-info">
-    </div>
     <div class="col-md-8 topic-area">
       <% if @user.topics.any? %>
         <ol class="topics">
@@ -12,6 +10,10 @@
       <% else %>
         作成したトピックはまだありません
       <% end %>
+    </div>
+    <div class="col-md-4">
+      <%= render "shared/user_info", user: @user %>
+      <%= render "shared/category_index", categories: @categories %>
     </div>
   </div>
 </div>

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Comments", type: :request do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
-  let!(:topic) { create(:topic, user: user) }
+  let(:topic) { create(:topic, user: user) }
 
   describe '#create' do
     context 'ログイン済ユーザー' do
@@ -13,7 +13,7 @@ RSpec.describe "Comments", type: :request do
 
       example '新しいコメントが登録できること' do
         expect do
-          post topic_comments_path(topic.id), params: { comment: { content: 'テストコメントです。' } }
+          post topic_comments_path(topic.id), params: { comment: { content: 'テストコメントです。' } }, xhr: true
         end.to change(topic.comments, :count).by(1)
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe "Comments", type: :request do
     context 'ログインしていないユーザー' do
       example '新しいコメントが登録できないこと' do
         expect do
-          post topic_comments_path(topic.id), params: { comment: { content: 'テストコメントです。' } }
+          post topic_comments_path(topic.id), params: { comment: { content: 'テストコメントです。' } }, xhr: true
         end.not_to change(topic.comments, :count)
       end
     end

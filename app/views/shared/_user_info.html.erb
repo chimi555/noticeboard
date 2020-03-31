@@ -1,0 +1,16 @@
+<div class="user-area">
+  <p>ユーザー情報</p>
+  <div class="user-area-info">
+    <div class="user-name-area">
+      <span>名前：</span>
+      <span class="user-name"><%= user.name %></span>
+    </div>
+    <% if current_user?(user) %>
+      <div class="user-edit-area">
+        <%= link_to edit_user_registration_path do %>
+          <span class="user-edit-btn"><i class="fas fa-cog"></i>プロフィール編集</span>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
