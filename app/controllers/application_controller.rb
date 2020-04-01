@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
     flash[:info] = '申し訳ありません。テストユーザーは編集できません。'
     redirect_to user_path(current_user.id)
   end
+
+  def admin_user
+    redirect_to(root_path) unless current_user.admin?
+  end
 end
