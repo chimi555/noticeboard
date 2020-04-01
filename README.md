@@ -1,24 +1,55 @@
-# README
+# NoticeBoard
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+掲示板アプリです。
 
-Things you may want to cover:
+## URL
 
-* Ruby version
+https://www.notice-board-app.xyz/
 
-* System dependencies
+ログインページ内テストログインボタンからで、テストユーザーとしてログインできます。</br>
+テストユーザーのみプロフィール情報を編集不可に設定しています。ご了承ください。</br>
 
-* Configuration
 
-* Database creation
+## 使用技術
 
-* Database initialization
+### 環境
 
-* How to run the test suite
+* Ruby 2.5.7
+* Rails 5.2.4
+* postgreSQL
+* Docker/docker-compose
 
-* Services (job queues, cache servers, search engines, etc.)
+### テスト
 
-* Deployment instructions
+* RSpec
 
-* ...
+### インフラ
+
+* AWS(VPC, EC2, RDS for postgreSQL, S3, Route 53, Elastic IP, ALB, ACM)
+* Nginx
+* Unicorn
+
+### フロント
+
+* SCSS
+* Bootstrap4
+* JQuery
+
+### その他使用gem
+
+* Rubocop
+* devise(ユーザー)
+* ransack(検索機能)
+* kaminari(ページネーション)
+
+## アプリケーションの機能
+
+* ユーザー登録/ログイン機能
+  - プロフィール編集
+  - 管理ユーザー機能（一般ユーザーのアカウント、トピックを削除可能）
+  - テストユーザー機能（testユーザーとしてログイン可、プロフィール編集不可制限）
+* トピック投稿、閲覧機能
+* コメント投稿機能（Ajax）
+* カテゴリ設定機能
+  - カテゴリ別一覧表示
+* トピック検索機能(単語/トピック及びコメントから)
