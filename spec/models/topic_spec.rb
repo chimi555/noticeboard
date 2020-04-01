@@ -20,10 +20,10 @@ RSpec.describe Topic, type: :model do
       expect(topic.errors[:title]).to include('を入力してください')
     end
 
-    example 'タイトルが51文字以上の場合無効であること' do
-      topic = build(:topic, title: "a" * 51)
+    example 'タイトルが101文字以上の場合無効であること' do
+      topic = build(:topic, title: "a" * 101)
       topic.valid?
-      expect(topic.errors[:title]).to include('は50文字以内で入力してください')
+      expect(topic.errors[:title]).to include('は100文字以内で入力してください')
     end
 
     example 'トピック概要が201文字以上の場合無効であること' do
