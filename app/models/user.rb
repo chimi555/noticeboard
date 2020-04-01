@@ -8,4 +8,6 @@ class User < ApplicationRecord
   # バリデーション
   validates :name, presence: true, length: { maximum: 20 }
   validates :email, uniqueness: true, presence: true
+  # role定義
+  enum role: { normal: 0, admin: 1, test: 2 }
 end
