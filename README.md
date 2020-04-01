@@ -35,10 +35,10 @@ https://www.notice-board-app.xyz/
 * Bootstrap4
 * JQuery
 
-### その他使用gem
+### その他使用gem等
 
 * Rubocop
-* devise(ユーザー)
+* devise(ユーザーログイン機能)
 * ransack(検索機能)
 * kaminari(ページネーション)
 
