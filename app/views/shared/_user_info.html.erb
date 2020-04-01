@@ -12,5 +12,12 @@
         <% end %>
       </div>
     <% end %>
+    <% if current_user.admin? %>
+      <div class="user-index-area">
+        <%= link_to users_path do %>
+          <span class="user-edit-btn">ユーザー一覧</span>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>

@@ -6,7 +6,7 @@ class Topic < ApplicationRecord
   has_many :categories, through: :topic_categories
   # バリデーション
   validates :user_id, presence: true
-  validates :title, presence: true, length: { maximum: 50 }
+  validates :title, presence: true, length: { maximum: 100 }
   validates :description, length: { maximum: 200 }
 
   default_scope -> { order(updated_at: :desc) }

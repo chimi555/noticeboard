@@ -73,8 +73,11 @@ class TopicsController < ApplicationController
   end
 
   def correct_user
-    @topic = current_user.topics.find_by(id: params[:id])
-    redirect_to root_path if @topic.nil?
+    @topic = Topic.find(params[:id])
+    unless current_user.admin? || @topic.user == current_user
+      flash[:danger] = "このトピックは編集・削除できません"
+      redirect_to root_path
+    end
   end
 
   def set_available_categories

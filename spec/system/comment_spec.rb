@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments', type: :system do
-  let(:user) { create(:user) }
-  let(:other_user) { create(:user) }
-  let(:topic) { create(:topic, user: user) }
+  let!(:user) { create(:user) }
+  let!(:other_user) { create(:user) }
+  let!(:topic) { create(:topic, user: user) }
 
   describe "コメント投稿機能" do
     before do
@@ -12,7 +12,7 @@ RSpec.describe 'Comments', type: :system do
     end
 
     context 'ログインユーザー' do
-      example 'コメント投稿が成功すること', js: true do
+      example 'コメント投稿が成功すること' do
         expect do
           within(".topic-comment-form") do
             fill_in 'comment[content]', with: 'テストコメントです！'

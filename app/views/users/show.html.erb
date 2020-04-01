@@ -6,7 +6,9 @@
         <ol class="topics">
           <%= render @topics %>
         </ol>
-         <%= paginate @topics %>
+        <div class="paginate-area">
+          <%= paginate @topics %>
+        </div>
       <% else %>
         作成したトピックはまだありません
       <% end %>

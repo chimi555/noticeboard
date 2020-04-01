@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Topics', type: :system do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
+  let(:admin_user) { create(:user, :admin) }
   let!(:topic) { create(:topic, user: user, updated_at: 3.day.ago.to_s) }
   let!(:other_topic) { create(:topic, updated_at: 2.day.ago.to_s) }
   let!(:topics) { create_list(:topic, 9, updated_at: 1.day.ago.to_s) }
@@ -84,6 +85,31 @@ RSpec.describe 'Topics', type: :system do
         expect(page).not_to have_link "編集"
       end
     end
+
+    context '管理者の場合' do
+      before do
+        sign_in admin_user
+        visit topic_path(topic.id)
+      end
+
+      example '編集ボタンが表示されること' do
+        expect(page).to have_link "編集"
+      end
+
+      context '正しい入力値' do
+        example 'トピックが更新できること', js: true do
+          click_on '編集'
+          within(".topic-form") do
+            fill_in 'topic[title]', with: 'testトピック更新'
+            fill_in 'tag', with: 'newカテゴリー'
+            click_on '更新する'
+          end
+          expect(page).to have_content 'トピックが更新されました！'
+          expect(page).to have_current_path topic_path(topic.id)
+          expect(topic.reload.title).to eq 'testトピック更新'
+        end
+      end
+    end
   end
 
   describe "トピック削除機能" do
@@ -115,6 +141,26 @@ RSpec.describe 'Topics', type: :system do
 
       example '削除ボタンが表示されないこと' do
         expect(page).not_to have_link "削除"
+      end
+    end
+
+    context '管理者の場合' do
+      before do
+        sign_in admin_user
+        visit topic_path(topic.id)
+      end
+
+      example '削除ボタンが表示されること' do
+        expect(page).to have_link "削除"
+      end
+
+      example 'トピックが削除できること', js: true do
+        within(".topic-show-edit") do
+          click_on '削除'
+        end
+        page.driver.browser.switch_to.alert.accept
+        expect(page).to have_content 'トピックが削除されました。'
+        expect(user.topics.count).to eq 0
       end
     end
   end

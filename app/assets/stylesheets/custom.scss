@@ -143,6 +143,10 @@ header {
   display: none;
 }
 
+.paginate-area{
+  text-align: center;
+}
+
 /*footer*/
 footer {
   margin-top: 60px;
@@ -212,6 +216,11 @@ footer {
   }
 }
 
+.user-index-area{
+  margin-top: 20px;
+  text-align: right;
+}
+
 /* user form */
 .user-form{
   max-width: 700px;
@@ -247,13 +256,24 @@ footer {
     font-weight: bold;
     font-size: 16px;
     padding: 10px 20px;
-    background: rgba(0,0,0,0.6);;
+    background: rgba(0,0,0,0.6);
     color: #fff;
   }
   .testlogin-btn:hover {
     background: rgba(0,0,0,0.4);
     border: solid 2px #ef5e09eb;
   }
+}
+
+/* user index */
+.each-user-area{
+  background: #fff;
+  padding: 10px;
+  margin: 10px;
+}
+.each-user-name{
+  color: rgba(0,0,0,0.7);
+  font-size: 16px;
 }
 
 /* topic form */
