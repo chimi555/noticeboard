@@ -6,7 +6,7 @@
 
 https://www.notice-board-app.xyz/
 
-ログインページ内テストログインボタンからで、テストユーザーとしてログインできます。</br>
+ログインページ内テストログインボタンから、テストユーザーとしてログインできます。</br>
 テストユーザーのみプロフィール情報を編集不可に設定しています。ご了承ください。</br>
 
 
@@ -25,7 +25,7 @@ https://www.notice-board-app.xyz/
 
 ### インフラ
 
-* AWS(VPC, EC2, RDS for postgreSQL, S3, Route 53, Elastic IP, ALB, ACM)
+* AWS(VPC, EC2, RDS for postgreSQL, Route 53, ALB, ACM)
 * Nginx
 * Unicorn
 
