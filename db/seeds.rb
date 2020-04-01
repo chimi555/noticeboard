@@ -3,6 +3,15 @@ User.create!(
   email: 'noticeboard@example.com',
   password: 'noticeboard',
   password_confirmation: 'noticeboard',
+  role: :test
+)
+
+User.create!(
+  name: 'adminユーザー',
+  email: Rails.application.credentials.user[:admin_user_email] ,
+  password: Rails.application.credentials.user[:admin_user_password],
+  password_confirmation: Rails.application.credentials.user[:admin_user_password],
+  role: :admin
 )
 
 30.times do |n|
@@ -12,7 +21,7 @@ User.create!(
   User.create!(name: name,
                email: email,
                password: password,
-               password_confirmation: password,
+               password_confirmation: password
               )
 end
 

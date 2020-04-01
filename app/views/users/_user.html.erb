@@ -1,0 +1,13 @@
+<div class= "col-md-4 col-sm-6 col-xs-12">
+  <li class="each-user-area">
+    <%= link_to user do%>
+      <p class="each-user-name">
+        <%= user.name %>
+      </p>
+    <% end %>
+    <% if current_user.admin? && !current_user?(user) %>
+      <%= link_to "delete", user_destroy_user_path(user), method: :delete,
+                                  data: { confirm: "本当に削除しますか?" } %>
+    <% end %>
+  </li>
+</div>

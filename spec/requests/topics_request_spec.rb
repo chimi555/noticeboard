@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Topics", type: :request do
   let(:user) { create(:user) }
   let(:other_user) { create(:user) }
+  let(:admin_user) { create(:user, :admin) }
   let!(:topic) { create(:topic, user: user) }
   let!(:other_topic) { create(:topic, user: other_user) }
   let(:topic_params) { { title: 'テストトピックタイトル', description: 'テストトピックです。' } }
@@ -100,6 +101,17 @@ RSpec.describe "Topics", type: :request do
           expect(response).to redirect_to root_path
         end
       end
+
+      context '管理ユーザーの場合' do
+        before do
+          sign_in admin_user
+          get edit_topic_path(topic.id)
+        end
+
+        example 'レスポンスが正常に表示されること' do
+          expect(response).to have_http_status(200)
+        end
+      end
     end
 
     context 'ログインしていないユーザー' do
@@ -180,6 +192,19 @@ RSpec.describe "Topics", type: :request do
             delete topic_path(topic.id)
           end.to change(user.topics, :count).by(0)
           expect(response).to redirect_to root_path
+        end
+      end
+
+      context '管理ユーザーの場合' do
+        before do
+          sign_in admin_user
+        end
+
+        example 'トピックを削除できる' do
+          expect do
+            delete topic_path(topic.id)
+          end.to change(user.topics, :count).by(-1)
+          expect(response).to redirect_to user_path(admin_user)
         end
       end
     end
